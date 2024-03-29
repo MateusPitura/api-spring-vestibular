@@ -27,7 +27,7 @@ public class Universidades {
         this.urlImage=dto.urlImage();
     }
 
-    public void update(UniversidadesDTO dto) {
+    public void update(UpdateUniversidadesDTO dto) {
         if(dto.nome() != null){
             this.nome = dto.nome();
         }
