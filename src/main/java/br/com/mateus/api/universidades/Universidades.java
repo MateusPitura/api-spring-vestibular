@@ -1,4 +1,4 @@
-package br.com.mateus.api.model;
+package br.com.mateus.api.universidades;
 
 import jakarta.persistence.*;
 
@@ -19,6 +19,32 @@ public class Universidades {
         this.nome=nome;
         this.sigla=sigla;
         this.urlImage=urlImage;
+    }
+
+    public Universidades(UniversidadesDTO dto){
+        this.nome=dto.nome();
+        this.sigla=dto.sigla();
+        this.urlImage=dto.urlImage();
+    }
+
+    public void update(UniversidadesDTO dto) {
+        if(dto.nome() != null){
+            this.nome = dto.nome();
+        }
+        if(dto.sigla() != null){
+            this.sigla = dto.sigla();
+        }
+        if(dto.urlImage() != null){
+            this.urlImage = dto.urlImage();
+        }
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
