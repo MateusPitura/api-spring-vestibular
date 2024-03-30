@@ -29,3 +29,10 @@ create table if not exists avisos(
     primary key(id),
     foreign key(id_universidade) references universidades(id)
 );
+
+create table if not exists users(
+    id bigint auto_increment not null,
+    username varchar(256) not null,
+    password varchar(256) not null,
+    primary key(id)
+);
