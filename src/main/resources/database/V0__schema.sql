@@ -12,22 +12,22 @@ create table if not exists universidades(
 
 create table if not exists eventos(
     id bigint auto_increment not null,
-    data timestamp not null,
+    data date not null,
     descricao varchar(255) not null,
-    id_universidade bigint not null,
+    universidade_id bigint not null,
     primary key(id),
-    foreign key(id_universidade) references universidades(id)
+    foreign key(universidade_id) references universidades(id)
 );
 
 create table if not exists avisos(
     id bigint auto_increment not null,
-    data date not null,
+    data timestamp not null,
     title varchar(128) not null,
     descricao varchar(256) not null,
     url varchar(256) not null,
-    id_universidade bigint not null,
+    universidade_id bigint not null,
     primary key(id),
-    foreign key(id_universidade) references universidades(id)
+    foreign key(universidade_id) references universidades(id)
 );
 
 create table if not exists users(
