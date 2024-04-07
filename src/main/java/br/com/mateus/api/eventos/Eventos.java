@@ -52,8 +52,8 @@ public class Eventos {
         this.descricao = descricao;
     }
 
-    public Universidades getUniversidade() {
-        return universidade;
+    public Long getUniversidade() {
+        return universidade.getId();
     }
 
     public void setUniversidade(Universidades universidade) {
