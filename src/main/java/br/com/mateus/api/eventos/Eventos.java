@@ -20,13 +20,26 @@ public class Eventos {
     @ManyToOne
     private Universidades universidade;
 
-    public Eventos(){}
+    public Eventos() {
+    }
 
     public Eventos(Date data, String descricao, Universidades universidades) {
         this.data = data;
         this.descricao = descricao;
         this.universidade = universidades;
-    }   
+    }
+
+    public void update(EventosDTO dto, Universidades universidades){
+        if(dto.data()!=null){
+            this.data = dto.data();
+        }
+        if(dto.descricao()!=null){
+            this.descricao = dto.descricao();
+        }
+        if(universidades != null){
+            this.universidade = universidades;
+        }
+    }
 
     public Long getId() {
         return id;

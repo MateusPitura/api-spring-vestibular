@@ -12,7 +12,4 @@ public record UpdateUniversidadesDTO(
     @URL(message = "A urlImage da universidade deve ser uma URL valida")
     String urlImage
 ) {
-    public UpdateUniversidadesDTO(Universidades universidades){
-        this(universidades.getNome(), universidades.getSigla(), universidades.getUrlImage());
-    }
 }
