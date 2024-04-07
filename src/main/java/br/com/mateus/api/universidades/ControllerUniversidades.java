@@ -2,7 +2,6 @@ package br.com.mateus.api.universidades;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import br.com.mateus.api.exception.IdNotFound;
-import br.com.mateus.api.exception.InvalidIdException;
+import br.com.mateus.api.exception.Utils;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 
@@ -43,7 +40,7 @@ public class ControllerUniversidades {
 
     @GetMapping("/{id}")
     public ResponseEntity<UniversidadesDTO> read(@PathVariable String id) {
-        Universidades universidades = getInstanceById(id);
+        Universidades universidades = Utils.getInstanceById(repositoryUniversidades, id);
         return ResponseEntity.ok(new UniversidadesDTO(universidades));
     }
 
@@ -51,36 +48,17 @@ public class ControllerUniversidades {
     @Transactional
     public ResponseEntity<UniversidadesDTO> update(@PathVariable String id,
             @RequestBody @Valid UpdateUniversidadesDTO dto) {
-        Universidades universidades = getInstanceById(id);
+        Universidades universidades = Utils.getInstanceById(repositoryUniversidades, id);
         universidades.update(dto);
         return ResponseEntity.ok(new UniversidadesDTO(universidades));
     }
 
-    @SuppressWarnings("null")
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity<Object> delete(@PathVariable String id) {
-        Long idLong = parseIdStringToLong(id);
-        getInstanceById(id);
+        Long idLong = Utils.parseIdStringToLong(id);
+        Utils.getInstanceById(repositoryUniversidades, id);
         repositoryUniversidades.deleteById(idLong);
         return ResponseEntity.noContent().build();
-    }
-
-    private Long parseIdStringToLong(String id) {
-        try {
-            return (long) Integer.parseInt(id);
-        } catch (NumberFormatException e) {
-            throw new InvalidIdException();
-        }
-    }
-
-    @SuppressWarnings("null")
-    private Universidades getInstanceById(String id) {
-        Optional<Universidades> universidades = repositoryUniversidades.findById(parseIdStringToLong(id));
-        if (universidades.isPresent()) {
-            return universidades.get();
-        } else {
-            throw new IdNotFound();
-        }
     }
 }
