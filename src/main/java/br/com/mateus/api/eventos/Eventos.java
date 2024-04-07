@@ -1,6 +1,6 @@
 package br.com.mateus.api.eventos;
 
-import java.time.LocalDate;
+import java.util.Date;
 import br.com.mateus.api.universidades.Universidades;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,18 +15,18 @@ public class Eventos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDate data;
+    private Date data;
     private String descricao;
     @ManyToOne
     private Universidades universidade;
 
     public Eventos(){}
 
-    public Eventos(LocalDate data, String descricao, Universidades universidades) {
+    public Eventos(Date data, String descricao, Universidades universidades) {
         this.data = data;
         this.descricao = descricao;
         this.universidade = universidades;
-    }
+    }   
 
     public Long getId() {
         return id;
@@ -36,11 +36,11 @@ public class Eventos {
         this.id = id;
     }
 
-    public void setData(LocalDate data) {
+    public void setData(Date data) {
         this.data = data;
     }
 
-    public LocalDate getData() {
+    public Date getData() {
         return data;
     }
 
