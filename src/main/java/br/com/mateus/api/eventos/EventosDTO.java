@@ -7,4 +7,7 @@ public record EventosDTO(
     String descricao,
     Long universidadeId
 ){
+    public EventosDTO(Eventos eventos){
+        this(eventos.getData(), eventos.getDescricao(), eventos.getUniversidade());
+    }
 }
