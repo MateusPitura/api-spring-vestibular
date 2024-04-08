@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import br.com.mateus.api.exception.Utils;
 import br.com.mateus.api.universidades.*;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/eventos")
@@ -31,12 +33,12 @@ public class ControllerEventos {
     private RepositoryEventosPageable repositoryEventosPageable;
 
     @Autowired
-    private RepositoryUniversidades repositoryUnividades;
+    private RepositoryUniversidades repositoryUniversidades;
 
     @PostMapping
     @Transactional
-    public ResponseEntity<EventosDTO> create(@RequestBody EventosDTO dto, UriComponentsBuilder uriComponents) {
-        Universidades universidade = repositoryUnividades.getReferenceById(dto.universidadeId());
+    public ResponseEntity<EventosDTO> create(@RequestBody @Valid EventosDTO dto, UriComponentsBuilder uriComponents) {
+        Universidades universidade = Utils.getInstanceById(repositoryUniversidades, dto.universidadeId().toString());
         Eventos eventos = new Eventos(dto, universidade);
         repositoryEventos.save(eventos);
         URI path = uriComponents.path("/eventos/{id}").buildAndExpand(eventos.getId()).toUri();
@@ -50,18 +52,18 @@ public class ControllerEventos {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<EventosDTO> read(@PathVariable Long id) {
-        Eventos eventos = repositoryEventos.getReferenceById(id);
+    public ResponseEntity<EventosDTO> read(@PathVariable String id) {
+        Eventos eventos = Utils.getInstanceById(repositoryEventos, id);
         return ResponseEntity.ok(new EventosDTO(eventos));
     }
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<EventosDTO> update(@PathVariable Long id, @RequestBody EventosDTO dto) {
-        Eventos eventos = repositoryEventos.getReferenceById(id);
+    public ResponseEntity<EventosDTO> update(@PathVariable String id, @RequestBody @Valid UpdateEventosDTO dto) {
+        Eventos eventos = Utils.getInstanceById(repositoryEventos, id);
         Universidades universidade = null;
         if (dto.universidadeId() != null) {
-            universidade = repositoryUnividades.getReferenceById(dto.universidadeId());
+            universidade = Utils.getInstanceById(repositoryUniversidades, dto.universidadeId().toString());
         }
         eventos.update(dto, universidade);
         return ResponseEntity.ok(new EventosDTO(eventos));
@@ -69,8 +71,10 @@ public class ControllerEventos {
 
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity<Object> delete(@PathVariable Long id) {
-        repositoryEventos.deleteById(id);
+    public ResponseEntity<Object> delete(@PathVariable String id) {
+        Long idLong = Utils.parseIdStringToLong(id);
+        Utils.getInstanceById(repositoryEventos, id);
+        repositoryEventos.deleteById(idLong);
         return ResponseEntity.noContent().build();
     }
 }

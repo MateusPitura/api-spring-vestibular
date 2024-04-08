@@ -35,7 +35,7 @@ public class Eventos {
         this.universidade = universidade;
     }
 
-    public void update(EventosDTO dto, Universidades universidades){
+    public void update(UpdateEventosDTO dto, Universidades universidades){
         if(dto.data()!=null){
             this.data = dto.data();
         }
