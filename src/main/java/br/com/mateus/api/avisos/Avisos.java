@@ -16,17 +16,24 @@ public class Avisos {
     private String descricao;
     private String url;
     @ManyToOne
-    private Universidades universidades;
+    private Universidades universidade;
 
-    public Avisos(){
+    public Avisos() {
 
     }
 
-    public Avisos(String title, String descricao, String url, Universidades universidades) {
+    public Avisos(String title, String descricao, String url, Universidades universidade) {
         this.title = title;
         this.descricao = descricao;
         this.url = url;
-        this.universidades = universidades;
+        this.universidade = universidade;
+    }
+
+    public Avisos(AvisosDTO dto, Universidades universidades){
+        this.title = dto.title();
+        this.descricao = dto.descricao();
+        this.url = dto.url();
+        this.universidade = universidades;
     }
 
     public Long getId() {
@@ -48,7 +55,7 @@ public class Avisos {
     public String getTitle() {
         return title;
     }
-    
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -69,11 +76,11 @@ public class Avisos {
         this.url = url;
     }
 
-    public Universidades getUniversidades() {
-        return universidades;
+    public Long getUniversidade() {
+        return universidade.getId();
     }
 
-    public void setUniversidades(Universidades universidades) {
-        this.universidades = universidades;
+    public void setUniversidade(Universidades universidade) {
+        this.universidade = universidade;
     }
 }
