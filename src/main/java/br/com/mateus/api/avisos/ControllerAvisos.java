@@ -20,6 +20,7 @@ import br.com.mateus.api.exception.Utils;
 import br.com.mateus.api.universidades.RepositoryUniversidades;
 import br.com.mateus.api.universidades.Universidades;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/avisos")
@@ -36,7 +37,7 @@ public class ControllerAvisos {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<AvisosDTO> create(@RequestBody AvisosDTO dto, UriComponentsBuilder uri){
+    public ResponseEntity<AvisosDTO> create(@RequestBody @Valid AvisosDTO dto, UriComponentsBuilder uri){
         Universidades universidade = Utils.getInstanceById(repositoryUniversidades, dto.universidadeId().toString());
         Avisos avisos = new Avisos(dto, universidade);
         URI path = uri.path("/avisos/{id}").buildAndExpand(avisos.getId()).toUri();
@@ -60,7 +61,7 @@ public class ControllerAvisos {
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<AvisosDTO> update(@PathVariable String id, @RequestBody UpdateAvisosDTO dto){
+    public ResponseEntity<AvisosDTO> update(@PathVariable String id, @RequestBody @Valid UpdateAvisosDTO dto){
         Avisos avisos = Utils.getInstanceById(repositoryAvisos, id);
         Universidades universidade = null;
         if(dto.universidadeId() != null){

@@ -10,7 +10,7 @@ public record EventosDTO(
     Date data,
     @NotBlank(message = "A descrição não poder ser vazia")
     String descricao,
-    @NotNull(message = "O id da universidade não poder ser vazia")
+    @NotNull(message = "O id da universidade não poder ser vazio")
     @Min(0)
     Long universidadeId
 ){

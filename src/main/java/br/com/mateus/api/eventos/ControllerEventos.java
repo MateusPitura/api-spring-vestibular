@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
-
 import br.com.mateus.api.exception.Utils;
 import br.com.mateus.api.universidades.*;
 import jakarta.transaction.Transactional;
