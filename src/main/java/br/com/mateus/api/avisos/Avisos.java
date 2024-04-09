@@ -36,6 +36,21 @@ public class Avisos {
         this.universidade = universidades;
     }
 
+    public void update(UpdateAvisosDTO dto, Universidades universidades){
+        if(dto.title() != null){
+            this.title = dto.title();
+        }
+        if(dto.descricao() != null){
+            this.descricao = dto.descricao();
+        }
+        if(dto.url() != null){
+            this.url = dto.url();
+        }
+        if(universidades != null){
+            this.universidade = universidades;
+        }
+    }
+
     public Long getId() {
         return id;
     }
