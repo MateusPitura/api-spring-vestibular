@@ -95,6 +95,10 @@ public class Avisos {
         return universidade.getId();
     }
 
+    public String getUniversidadeImage() {
+        return universidade.getUrlImage();
+    }
+
     public void setUniversidade(Universidades universidade) {
         this.universidade = universidade;
     }

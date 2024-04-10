@@ -37,12 +37,12 @@ public class ControllerAvisos {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<AvisosDTO> create(@RequestBody @Valid AvisosDTO dto, UriComponentsBuilder uri){
+    public ResponseEntity<OutputAvisosDTO> create(@RequestBody @Valid AvisosDTO dto, UriComponentsBuilder uri){
         Universidades universidade = Utils.getInstanceById(repositoryUniversidades, dto.universidadeId().toString());
         Avisos avisos = new Avisos(dto, universidade);
+        repositoryAvisos.save(avisos);
         URI path = uri.path("/avisos/{id}").buildAndExpand(avisos.getId()).toUri();
-        repositoryAvisos.save(new Avisos());
-        return ResponseEntity.created(path).body(new AvisosDTO(avisos));
+        return ResponseEntity.created(path).body(new OutputAvisosDTO(avisos));
     }
 
     @GetMapping
@@ -54,21 +54,21 @@ public class ControllerAvisos {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AvisosDTO> read(@PathVariable String id){
+    public ResponseEntity<OutputAvisosDTO> read(@PathVariable String id){
         Avisos avisos = Utils.getInstanceById(repositoryAvisos, id);
-        return ResponseEntity.ok(new AvisosDTO(avisos));
+        return ResponseEntity.ok(new OutputAvisosDTO(avisos));
     }
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<AvisosDTO> update(@PathVariable String id, @RequestBody @Valid UpdateAvisosDTO dto){
+    public ResponseEntity<OutputAvisosDTO> update(@PathVariable String id, @RequestBody @Valid UpdateAvisosDTO dto){
         Avisos avisos = Utils.getInstanceById(repositoryAvisos, id);
         Universidades universidade = null;
         if(dto.universidadeId() != null){
             universidade = Utils.getInstanceById(repositoryUniversidades, dto.universidadeId().toString());
         }
         avisos.update(dto, universidade);
-        return ResponseEntity.ok(new AvisosDTO(avisos));
+        return ResponseEntity.ok(new OutputAvisosDTO(avisos));
     }
 
     @DeleteMapping("/{id}")
