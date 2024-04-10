@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 import br.com.mateus.api.exception.Utils;
@@ -46,11 +47,16 @@ public class ControllerAvisos {
     }
 
     @GetMapping
-    public ResponseEntity<Page<Avisos>> list(
-        @PageableDefault(size = 20, page = 0, sort = "data", direction = Sort.Direction.ASC) 
-        Pageable pageable
+    public ResponseEntity<Page<ReadAvisosDTO>> list(
+        @PageableDefault(size = 20, page = 0, sort = "data", direction = Sort.Direction.ASC) Pageable pageable,
+        @RequestParam(name="universidade", required=false) String idUniversidade
     ){
-        return ResponseEntity.ok(repositoryAvisosPageable.findAll(pageable));
+        if(idUniversidade == null){
+            return ResponseEntity.ok(repositoryAvisosPageable.findAllItens(pageable));
+        } 
+        Long idUniversidadeLong = Utils.parseIdStringToLong(idUniversidade);
+        Utils.getInstanceById(repositoryUniversidades, idUniversidade);
+        return ResponseEntity.ok(repositoryAvisosPageable.findAllById(pageable, idUniversidadeLong));
     }
 
     @GetMapping("/{id}")
