@@ -3,6 +3,8 @@ package br.com.mateus.api.universidades;
 import java.net.URI;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +21,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/universidades")
+@EnableCaching
 public class ControllerUniversidades {
 
     @Autowired
@@ -34,8 +37,9 @@ public class ControllerUniversidades {
     }
 
     @GetMapping
-    public ResponseEntity<List<Universidades>> list() {
-        return ResponseEntity.ok(repositoryUniversidades.findAll());
+    @Cacheable("universidades")
+    public List<Universidades> list() {
+        return repositoryUniversidades.findAll();
     }
 
     @GetMapping("/{id}")

@@ -26,7 +26,7 @@ import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/avisos")
 public class ControllerAvisos {
-    
+
     @Autowired
     private RepositoryAvisos repositoryAvisos;
 
@@ -38,7 +38,7 @@ public class ControllerAvisos {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<OutputAvisosDTO> create(@RequestBody @Valid AvisosDTO dto, UriComponentsBuilder uri){
+    public ResponseEntity<OutputAvisosDTO> create(@RequestBody @Valid AvisosDTO dto, UriComponentsBuilder uri) {
         Universidades universidade = Utils.getInstanceById(repositoryUniversidades, dto.universidadeId().toString());
         Avisos avisos = new Avisos(dto, universidade);
         repositoryAvisos.save(avisos);
@@ -47,30 +47,29 @@ public class ControllerAvisos {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ReadAvisosDTO>> list(
-        @PageableDefault(size = 20, page = 0, sort = "data", direction = Sort.Direction.ASC) Pageable pageable,
-        @RequestParam(name="universidade", required=false) String idUniversidade
-    ){
-        if(idUniversidade == null){
-            return ResponseEntity.ok(repositoryAvisosPageable.findAllItens(pageable));
-        } 
+    public Page<ReadAvisosDTO> list(
+            @PageableDefault(size = 20, page = 0, sort = "data", direction = Sort.Direction.ASC) Pageable pageable,
+            @RequestParam(name = "universidade", required = false) String idUniversidade) {
+        if (idUniversidade == null) {
+            return repositoryAvisosPageable.findAllItens(pageable);
+        }
         Long idUniversidadeLong = Utils.parseIdStringToLong(idUniversidade);
         Utils.getInstanceById(repositoryUniversidades, idUniversidade);
-        return ResponseEntity.ok(repositoryAvisosPageable.findAllById(pageable, idUniversidadeLong));
+        return repositoryAvisosPageable.findAllById(pageable, idUniversidadeLong);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<OutputAvisosDTO> read(@PathVariable String id){
+    public ResponseEntity<OutputAvisosDTO> read(@PathVariable String id) {
         Avisos avisos = Utils.getInstanceById(repositoryAvisos, id);
         return ResponseEntity.ok(new OutputAvisosDTO(avisos));
     }
 
     @PutMapping("/{id}")
     @Transactional
-    public ResponseEntity<OutputAvisosDTO> update(@PathVariable String id, @RequestBody @Valid UpdateAvisosDTO dto){
+    public ResponseEntity<OutputAvisosDTO> update(@PathVariable String id, @RequestBody @Valid UpdateAvisosDTO dto) {
         Avisos avisos = Utils.getInstanceById(repositoryAvisos, id);
         Universidades universidade = null;
-        if(dto.universidadeId() != null){
+        if (dto.universidadeId() != null) {
             universidade = Utils.getInstanceById(repositoryUniversidades, dto.universidadeId().toString());
         }
         avisos.update(dto, universidade);
@@ -79,7 +78,7 @@ public class ControllerAvisos {
 
     @DeleteMapping("/{id}")
     @Transactional
-    public ResponseEntity<Object> delete(@PathVariable String id){
+    public ResponseEntity<Object> delete(@PathVariable String id) {
         Long idLong = Utils.parseIdStringToLong(id);
         Utils.getInstanceById(repositoryAvisos, id);
         repositoryAvisos.deleteById(idLong);
