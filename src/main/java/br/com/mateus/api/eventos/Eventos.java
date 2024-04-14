@@ -1,6 +1,5 @@
 package br.com.mateus.api.eventos;
 
-import java.io.Serializable;
 import java.util.Date;
 import br.com.mateus.api.universidades.Universidades;
 import jakarta.persistence.Entity;
@@ -12,7 +11,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "eventos")
-public class Eventos implements Serializable {
+public class Eventos {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

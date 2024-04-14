@@ -2,7 +2,7 @@ package br.com.mateus.api.avisos;
 
 import java.util.Date;
 
-public interface ReadAvisosDTO{
+public interface ReadAvisosDTO {
     Long getId();
     Date getData();
     String getTitle();

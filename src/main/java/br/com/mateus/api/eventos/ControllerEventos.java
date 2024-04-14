@@ -2,8 +2,6 @@ package br.com.mateus.api.eventos;
 
 import java.net.URI;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -25,7 +23,6 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/eventos")
-@EnableCaching
 public class ControllerEventos {
 
     @Autowired
@@ -48,10 +45,9 @@ public class ControllerEventos {
     }
 
     @GetMapping
-    @Cacheable("eventos")
-    public Page<Eventos> list(
+    public ResponseEntity<Page<Eventos>> list(
             @PageableDefault(size = 20, page = 0, sort = "data", direction = Sort.Direction.ASC) Pageable pageable) {
-        return repositoryEventosPageable.findAll(pageable);
+        return ResponseEntity.ok(repositoryEventosPageable.findAll(pageable));
     }
 
     @GetMapping("/{id}")

@@ -1,12 +1,10 @@
 package br.com.mateus.api.universidades;
 
-import java.io.Serializable;
-
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "universidades")
-public class Universidades implements Serializable {
+public class Universidades {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
