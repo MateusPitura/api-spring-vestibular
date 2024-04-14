@@ -2,10 +2,6 @@ package br.com.mateus.api.avisos;
 
 import java.net.URI;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +18,7 @@ import br.com.mateus.api.universidades.RepositoryUniversidades;
 import br.com.mateus.api.universidades.Universidades;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/avisos")
@@ -29,9 +26,6 @@ public class ControllerAvisos {
     
     @Autowired
     private RepositoryAvisos repositoryAvisos;
-
-    @Autowired
-    private RepositoryAvisosPageable repositoryAvisosPageable;
 
     @Autowired
     private RepositoryUniversidades repositoryUniversidades;
@@ -47,16 +41,11 @@ public class ControllerAvisos {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ReadAvisosDTO>> list(
-        @PageableDefault(size = 20, page = 0, sort = "data", direction = Sort.Direction.ASC) Pageable pageable,
-        @RequestParam(name="universidade", required=false) String idUniversidade
-    ){
+    public ResponseEntity<List<ReadAvisosDTO>> list(@RequestParam(name="universidade", required=false) List<String> idUniversidade){
         if(idUniversidade == null){
-            return ResponseEntity.ok(repositoryAvisosPageable.findAllItens(pageable));
+            return ResponseEntity.ok(repositoryAvisos.findAllItens());
         } 
-        Long idUniversidadeLong = Utils.parseIdStringToLong(idUniversidade);
-        Utils.getInstanceById(repositoryUniversidades, idUniversidade);
-        return ResponseEntity.ok(repositoryAvisosPageable.findAllById(pageable, idUniversidadeLong));
+        return ResponseEntity.ok(repositoryAvisos.findAllById(idUniversidade));
     }
 
     @GetMapping("/{id}")

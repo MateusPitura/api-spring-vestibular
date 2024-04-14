@@ -2,10 +2,6 @@ package br.com.mateus.api.eventos;
 
 import java.net.URI;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,12 +10,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 import br.com.mateus.api.exception.Utils;
 import br.com.mateus.api.universidades.*;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/eventos")
@@ -27,9 +25,6 @@ public class ControllerEventos {
 
     @Autowired
     private RepositoryEventos repositoryEventos;
-
-    @Autowired
-    private RepositoryEventosPageable repositoryEventosPageable;
 
     @Autowired
     private RepositoryUniversidades repositoryUniversidades;
@@ -45,9 +40,11 @@ public class ControllerEventos {
     }
 
     @GetMapping
-    public ResponseEntity<Page<Eventos>> list(
-            @PageableDefault(size = 20, page = 0, sort = "data", direction = Sort.Direction.ASC) Pageable pageable) {
-        return ResponseEntity.ok(repositoryEventosPageable.findAll(pageable));
+    public ResponseEntity<List<ReadEventosDTO>> list(@RequestParam(name="universidade", required=false) List<String> idUniversidade) {
+        if(idUniversidade == null){
+            return ResponseEntity.ok(repositoryEventos.findAllItens());
+        } 
+        return ResponseEntity.ok(repositoryEventos.findAllById(idUniversidade));
     }
 
     @GetMapping("/{id}")
