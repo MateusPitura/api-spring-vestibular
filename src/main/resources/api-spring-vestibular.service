@@ -1,12 +1,10 @@
 [Unit]
 Description=api-spring-vestibular
-After=network.target
+After=syslog.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/java -jar /home/ubuntu/api/api-0.0.1-SNAPSHOT.jar
-User=root
-Restart=on-failure
+ExecStart=/usr/bin/java -jar /home/mateus/Documents/api-0.0.1-SNAPSHOT.jar
 
 [Install]
 WantedBy=multi-user.service
