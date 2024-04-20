@@ -7,13 +7,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "eventos")
 public class Eventos {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "eventos_seq")
+    @SequenceGenerator(name="eventos_seq", sequenceName = "eventos_seq", initialValue = 1, allocationSize = 1)
     private Long id;
     private Date data;
     private String descricao;

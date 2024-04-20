@@ -8,7 +8,8 @@ import jakarta.persistence.*;
 @Table(name = "avisos")
 public class Avisos {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "avisos_seq")
+    @SequenceGenerator(name="avisos_seq", sequenceName = "avisos_seq", initialValue = 1, allocationSize = 1)
     private Long id;
     @Temporal(TemporalType.TIMESTAMP)
     private Date data = new Date();
