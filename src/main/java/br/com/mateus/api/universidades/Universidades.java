@@ -22,24 +22,6 @@ public class Universidades {
         this.urlImage=urlImage;
     }
 
-    public Universidades(UniversidadesDTO dto){
-        this.nome=dto.nome();
-        this.sigla=dto.sigla();
-        this.urlImage=dto.urlImage();
-    }
-
-    public void update(UpdateUniversidadesDTO dto) {
-        if(dto.nome() != null){
-            this.nome = dto.nome();
-        }
-        if(dto.sigla() != null){
-            this.sigla = dto.sigla();
-        }
-        if(dto.urlImage() != null){
-            this.urlImage = dto.urlImage();
-        }
-    }
-
     public Long getId() {
         return id;
     }

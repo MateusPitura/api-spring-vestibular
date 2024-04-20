@@ -30,28 +30,6 @@ public class Avisos {
         this.universidade = universidade;
     }
 
-    public Avisos(AvisosDTO dto, Universidades universidades){
-        this.title = dto.title();
-        this.descricao = dto.descricao();
-        this.url = dto.url();
-        this.universidade = universidades;
-    }
-
-    public void update(UpdateAvisosDTO dto, Universidades universidades){
-        if(dto.title() != null){
-            this.title = dto.title();
-        }
-        if(dto.descricao() != null){
-            this.descricao = dto.descricao();
-        }
-        if(dto.url() != null){
-            this.url = dto.url();
-        }
-        if(universidades != null){
-            this.universidade = universidades;
-        }
-    }
-
     public Long getId() {
         return id;
     }

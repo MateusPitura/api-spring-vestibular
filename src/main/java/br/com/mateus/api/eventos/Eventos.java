@@ -31,24 +31,6 @@ public class Eventos {
         this.universidade = universidades;
     }
 
-    public Eventos(EventosDTO dto, Universidades universidade){
-        this.data = dto.data();
-        this.descricao = dto.descricao();
-        this.universidade = universidade;
-    }
-
-    public void update(UpdateEventosDTO dto, Universidades universidades){
-        if(dto.data()!=null){
-            this.data = dto.data();
-        }
-        if(dto.descricao()!=null){
-            this.descricao = dto.descricao();
-        }
-        if(universidades != null){
-            this.universidade = universidades;
-        }
-    }
-
     public Long getId() {
         return id;
     }
