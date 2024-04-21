@@ -1,0 +1,10 @@
+[Unit]
+Description=api-spring-vestibular
+After=syslog.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/java -jar /home/ubuntu/api-0.0.1-SNAPSHOT.jar
+
+[Install]
+WantedBy=multi-user.service
