@@ -37,7 +37,7 @@ O projeto possui duas branches. `main` para ser executada locamente sem compila�
 
 ## Como executar 
 
-Acesse a documentação da API no [Postman](https://documenter.getpostman.com/view/28639415/2sA3Bobrpw) para utilizar
+Acesse a documentação da API no [Postman](https://documenter.getpostman.com/view/28639415/2sA3Bobrpw) para aprender a utilizar
 
 **Para devs | main:** 
 
