@@ -20,11 +20,8 @@ O projeto possui duas branches. `main` para ser executada locamente sem compila√
 ## √çndice 
 
 - [Funcionalidades](#funcionalidades) 
-
 - [Como executar](#como-executar) 
-
 - [Tecnologias usadas](#tecnologias-usadas) 
-
 - [Autores](#autores) 
 
 ## Funcionalidades 
