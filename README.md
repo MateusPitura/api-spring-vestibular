@@ -13,7 +13,7 @@
 
 ## Descrição 
 
-Este projeto consiste em uma REST API desenvolvida em Spring Boot para suportar o aplicativo Vest Info. Ela fornece endpoints para o consumo de universidades, eventos e avisos dos principais vestibulares de Ponta Grossa - PR
+Este projeto consiste em uma REST API desenvolvida em Spring Boot para suportar o aplicativo [Vest Info](https://github.com/MateusPitura/app-reactnative-vestibular). Ela fornece endpoints para o consumo de universidades, eventos e avisos dos principais vestibulares de Ponta Grossa - PR
 
 O projeto possui duas branches. `main` para ser executada locamente sem compilação, com autenticação e CRUD completo. `sever` para ser executada em servidores, com apenas o GET liberado
 
