@@ -37,6 +37,8 @@ O projeto possui duas branches. `main` para ser executada locamente sem compila�
 
 ## Como executar 
 
+Acesse a documentação da API no [Postman](https://documenter.getpostman.com/view/28639415/2sA3Bobrpw) para utilizar
+
 **Para devs | main:** 
 
 1. Crie duas variáveis de ambiente: `DATA_BASE` com a senha da wallet e `API_KEY_VESTIBULARES` com um valor qualquer
