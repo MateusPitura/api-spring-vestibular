@@ -68,5 +68,5 @@ Acesse a documentação da API no [Postman](https://documenter.getpostman.com/vi
 
 | Mateus Pitura | 
 |------| 
-| <p align="center"><img src="https://user-images.githubusercontent.com/119008106/227821967-fac62c31-0d62-485b-829e-ef56c033e21a.jpeg" width="100" height="100"></p> | 
+| <p align="center"><img src="https://avatars.githubusercontent.com/u/119008106" width="100" height="100"></p> | 
 | <a href="https://www.linkedin.com/in/mateuspitura/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"> |
