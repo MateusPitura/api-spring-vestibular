@@ -9,8 +9,6 @@
   <img src="https://img.shields.io/github/stars/MateusPitura/api-spring-vestibular?style=social" alt="Badge indicando quantidade de estrelas no repositório"> 
 </p> 
 
-> :checkered_flag: Este projeto está finalizado :checkered_flag:  
-
 ## Descrição 
 
 Este projeto consiste em uma REST API desenvolvida em Spring Boot para suportar o aplicativo [Vest Info](https://github.com/MateusPitura/app-reactnative-vestibular). Ela fornece endpoints para o consumo de universidades, eventos e avisos dos principais vestibulares de Ponta Grossa - PR
